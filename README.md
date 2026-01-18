@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Map2Poster
+
+A web application for creating stylized map posters of any city. Search for a location, choose from 17 unique themes, customize the radius and aspect ratio, then export your poster as an image.
+
+## Features
+
+- **City Search**: Find any city worldwide with autocomplete
+- **17 Themes**: Noir, Midnight Blue, Blueprint, Neon Cyberpunk, Japanese Ink, Sunset, Forest, Ocean, Vintage, Arctic, Copper, Lavender, Emerald, Rose Gold, Monochrome, Coral, and Mint
+- **Customizable Radius**: Adjust how much of the map to display
+- **Multiple Aspect Ratios**: Choose the perfect dimensions for your poster
+- **Labels Toggle**: Show or hide map labels
+- **Export**: Download your poster as a high-quality image
+- **Shareable URLs**: Share your poster configuration via URL
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org/) 16
+- [React](https://react.dev/) 19
+- [MapLibre GL](https://maplibre.org/) for map rendering
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [html-to-image](https://github.com/bubkoo/html-to-image) for export
+- [nuqs](https://nuqs.47ng.com/) for URL state management
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- pnpm, npm, or yarn
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Clone the repository
+git clone https://github.com/yourusername/map2poster.git
+cd map2poster
+
+# Install dependencies
+pnpm install
+
+# Start the development server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

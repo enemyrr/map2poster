@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 interface SearchResult {
   place_id: number;
@@ -21,6 +21,16 @@ interface SearchResult {
 interface CitySearchProps {
   value: string;
   onSelect: (city: string, country: string, lat: number, lng: number) => void;
+}
+
+function extractCityName(result: SearchResult): string {
+  return (
+    result.address?.city ||
+    result.address?.town ||
+    result.address?.village ||
+    result.address?.municipality ||
+    result.display_name.split(",")[0]
+  );
 }
 
 export function CitySearch({ value, onSelect }: CitySearchProps) {
@@ -48,7 +58,7 @@ export function CitySearch({ value, onSelect }: CitySearchProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const searchCities = useCallback(async (searchQuery: string) => {
+  async function searchCities(searchQuery: string) {
     if (searchQuery.length < 2) {
       setResults([]);
       return;
@@ -80,9 +90,9 @@ export function CitySearch({ value, onSelect }: CitySearchProps) {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     const newQuery = e.target.value;
     setQuery(newQuery);
 
@@ -93,35 +103,24 @@ export function CitySearch({ value, onSelect }: CitySearchProps) {
     debounceRef.current = setTimeout(() => {
       searchCities(newQuery);
     }, 300);
-  };
+  }
 
-  const handleSelect = (result: SearchResult) => {
-    const cityName =
-      result.address?.city ||
-      result.address?.town ||
-      result.address?.village ||
-      result.address?.municipality ||
-      result.display_name.split(",")[0];
+  function handleSelect(result: SearchResult) {
+    const cityName = extractCityName(result);
     const countryName = result.address?.country || "";
 
     setQuery(cityName);
     setIsOpen(false);
     onSelect(cityName, countryName, parseFloat(result.lat), parseFloat(result.lon));
-  };
+  }
 
-  const getCityDisplay = (result: SearchResult) => {
-    const city =
-      result.address?.city ||
-      result.address?.town ||
-      result.address?.village ||
-      result.address?.municipality ||
-      result.display_name.split(",")[0];
-    const region =
-      result.address?.state || result.address?.county || "";
+  function getCityDisplay(result: SearchResult) {
+    const city = extractCityName(result);
+    const region = result.address?.state || result.address?.county || "";
     const country = result.address?.country || "";
 
     return { city, region, country };
-  };
+  }
 
   return (
     <div ref={containerRef} className="relative">

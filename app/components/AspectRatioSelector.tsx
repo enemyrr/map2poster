@@ -47,18 +47,3 @@ export function AspectRatioSelector({ value, onChange }: AspectRatioSelectorProp
     </div>
   );
 }
-
-export function getAspectRatioDimensions(ratio: AspectRatio, baseSize: number = 1200): { width: number; height: number } {
-  switch (ratio) {
-    case "1:1":
-      return { width: baseSize, height: baseSize };
-    case "4:3":
-      return { width: baseSize, height: baseSize * (3 / 4) };
-    case "3:4":
-      return { width: baseSize * (3 / 4), height: baseSize };
-    case "16:9":
-      return { width: baseSize, height: baseSize * (9 / 16) };
-    case "9:16":
-      return { width: baseSize * (9 / 16), height: baseSize };
-  }
-}

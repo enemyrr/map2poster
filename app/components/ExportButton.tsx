@@ -54,23 +54,28 @@ export function ExportButton({
 }: ExportButtonProps) {
   const [isExporting, setIsExporting] = useState(false);
 
-  const formatCoord = (coord: number, isLat: boolean) => {
-    const direction = isLat ? (coord >= 0 ? "N" : "S") : coord >= 0 ? "E" : "W";
+  function formatCoord(coord: number, isLat: boolean): string {
+    let direction: string;
+    if (isLat) {
+      direction = coord >= 0 ? "N" : "S";
+    } else {
+      direction = coord >= 0 ? "E" : "W";
+    }
     return `${Math.abs(coord).toFixed(4)}° ${direction}`;
-  };
+  }
 
-  const captureMap = (map: maplibregl.Map): Promise<string> => {
+  function captureMap(map: maplibregl.Map): Promise<string> {
     return new Promise((resolve) => {
-      const onRender = () => {
+      function onRender() {
         map.off('render', onRender);
         const canvas = map.getCanvas();
         const dataUrl = canvas.toDataURL('image/png');
         resolve(dataUrl);
-      };
+      }
       map.on('render', onRender);
       map.triggerRepaint();
     });
-  };
+  }
 
   const handleExport = async () => {
     const map = mapRef.current;

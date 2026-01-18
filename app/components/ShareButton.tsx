@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 interface ShareButtonProps {
   city: string;
@@ -9,7 +9,7 @@ interface ShareButtonProps {
 export function ShareButton({ city }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
 
-  const handleShare = useCallback(async () => {
+  async function handleShare() {
     const url = window.location.href;
     const title = `${city} Map Poster`;
 
@@ -29,7 +29,7 @@ export function ShareButton({ city }: ShareButtonProps) {
     } catch (err) {
       console.error("Failed to copy URL:", err);
     }
-  }, [city]);
+  }
 
   return (
     <button

@@ -50,7 +50,6 @@ export function MapPreview({
       zoom: zoom,
       attributionControl: false,
       interactive: true,
-      preserveDrawingBuffer: true, // Required for canvas export
     });
 
     map.on("load", () => {

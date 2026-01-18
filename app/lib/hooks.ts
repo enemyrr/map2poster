@@ -77,13 +77,9 @@ export function useMapState() {
 
   return {
     city,
-    setCity,
     country,
-    setCountry,
     lat,
-    setLat,
     lng,
-    setLng,
     theme,
     setTheme,
     radius,
